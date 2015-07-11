@@ -1,12 +1,21 @@
+#!/usr/bin/env python3
+
 import sys
+import argparse
+
+# Use an option parser
+parser = argparse.ArgumentParser()
+parser.add_argument('-l', '--letters', required=True, help='Letter to use for finding word')
+parser.add_argument('-p', '--preference', help='Preferred letter')
+args = parser.parse_args()
 
 # Get the letters from the command line
-if len(sys.argv) < 2:
-    print ("You need to supply the letters")
-    exit(1)
+#if len(sys.argv) < 2:
+#    print ("You need to supply the letters")
+#    exit(1)
 
 # Assign the letters we got from the command line to the rack variable
-rack = sys.argv[1]
+rack = args.letters
 
 # Initialize an empty wordlist
 wordlist = []
@@ -42,4 +51,8 @@ valid_words.sort()
 for entry in valid_words:
     length = entry[0]
     word = entry[1]
-    print(str(length) + " " + word)
+    if args.preference:                     # If we had a preferred letter
+        if str(args.preference) in word:    # Check if the letter is in the word
+            print(str(length) + " " + word) # And print only words containing the preferred letter
+    else:                                   # else
+        print(str(length) + " " + word)     # print all matching words
