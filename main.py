@@ -5,8 +5,8 @@ import argparse
 
 # Use an option parser
 parser = argparse.ArgumentParser()
-parser.add_argument('-l', '--letters', required=True, help='Letter to use for finding word')
-parser.add_argument('-p', '--preference', help='Preferred letter')
+parser.add_argument('letters', help='Letter to use for finding word')
+parser.add_argument('preference', nargs='?', help='Preferred letter')
 args = parser.parse_args()
 
 # Get the letters from the command line
