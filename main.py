@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 import argparse
 
@@ -12,8 +11,9 @@ args = parser.parse_args()
 # Assign the letters we got from the command line to the rack variable
 rack = args.letters
 
-# Initialize an empty wordlist
+# Initialize lists
 wordlist = []
+valid_words = []
 
 # Open the Scrabble word list, exit if the file is not present
 try:
@@ -23,9 +23,6 @@ try:
 except EnvironmentError:
     print ("Cannot find wordlist")
     exit(1)
-
-# Initialize an empty wordlist to hold valid words
-valid_words = []
 
 for word in wordlist:
     candidate = True
