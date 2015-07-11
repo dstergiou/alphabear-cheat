@@ -15,40 +15,44 @@ except EnvironmentError:
     exit(1)
 
 while True:
-    # Initialize valid word list
-    valid_words = []
+    try:
+        # Initialize valid word list
+        valid_words = []
 
-    # Get user input
-    query = input("[" + str(executed) + "]> ")
-    if " " in query:
-        rack, preference = query.split()
-    else:
-        rack = query
-        preference = None
+        # Get user input
+        query = input("[" + str(executed) + "]> ")
+        if " " in query:
+            rack, preference = query.split()
+        else:
+            rack = query
+            preference = None
 
-    # Find the words
-    for word in wordlist:
-        candidate = True
-        rack_letters = list(rack)
-        for letter in word:
-            if letter not in rack_letters:
-                candidate = False
-                break
-            else:
-                rack_letters.remove(letter)
-        if candidate == True:
-            valid_words.append([len(word), word])
+        # Find the words
+        for word in wordlist:
+            candidate = True
+            rack_letters = list(rack)
+            for letter in word:
+                if letter not in rack_letters:
+                    candidate = False
+                    break
+                else:
+                    rack_letters.remove(letter)
+            if candidate == True:
+                valid_words.append([len(word), word])
 
-    # Sort the valid words
-    valid_words.sort()
+        # Sort the valid words
+        valid_words.sort()
 
-    # Print words in the format (number of letters, word)
-    for entry in valid_words:
-        length = entry[0]
-        word = entry[1]
-        if preference:                     # If we had a preferred letter
-            if str(preference) in word:    # Check if the letter is in the word
-                print(str(length) + " " + word) # And print only words containing the preferred letter
-        else:                                   # else
-            print(str(length) + " " + word)     # print all matching words
-    executed += 1
+        # Print words in the format (number of letters, word)
+        for entry in valid_words:
+            length = entry[0]
+            word = entry[1]
+            if preference:                     # If we had a preferred letter
+                if str(preference) in word:    # Check if the letter is in the word
+                    print(str(length) + " " + word) # And print only words containing the preferred letter
+            else:                                   # else
+                print(str(length) + " " + word)     # print all matching words
+        executed += 1
+    except KeyboardInterrupt:
+        print("Exiting")
+        exit(1)
