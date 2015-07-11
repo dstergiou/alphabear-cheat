@@ -3,6 +3,7 @@ import sys
 
 # Initialize list
 wordlist = []
+executed = 0
 
 # Open the Scrabble word list, exit if the file is not present
 try:
@@ -18,7 +19,7 @@ while True:
     valid_words = []
 
     # Get user input
-    query = input("> ")
+    query = input("[" + str(executed) + "]> ")
     if " " in query:
         rack, preference = query.split()
     else:
@@ -50,3 +51,4 @@ while True:
                 print(str(length) + " " + word) # And print only words containing the preferred letter
         else:                                   # else
             print(str(length) + " " + word)     # print all matching words
+    executed += 1
