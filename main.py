@@ -1,9 +1,11 @@
 import sys
 
+# Get the letters from the command line
 if len(sys.argv) < 2:
-    print ("You need to supply letter")
+    print ("You need to supply the letters")
     exit(1)
 
+# Assign the letters we got from the command line to the rack variable
 rack = sys.argv[1]
 
 wordlist = []
