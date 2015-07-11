@@ -9,11 +9,6 @@ parser.add_argument('letters', help='Letter to use for finding word')
 parser.add_argument('preference', nargs='?', help='Preferred letter')
 args = parser.parse_args()
 
-# Get the letters from the command line
-#if len(sys.argv) < 2:
-#    print ("You need to supply the letters")
-#    exit(1)
-
 # Assign the letters we got from the command line to the rack variable
 rack = args.letters
 
