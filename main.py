@@ -49,8 +49,12 @@ while True:
             length = entry[0]
             word = entry[1]
             if preference:                     # If we had a preferred letter
-                if str(preference) in word:    # Check if the letter is in the word
-                    print(str(length) + " " + word) # And print only words containing the preferred letter
+                candidate = True
+                for letter in list(preference):
+                    if not str(letter) in word:    # Check if the letter is in the word
+                        candidate = False
+                if candidate == True:
+                    print(str(length) + " " + word) # And print only words containing the preferred letter(s)
             else:                                   # else
                 print(str(length) + " " + word)     # print all matching words
         executed += 1
