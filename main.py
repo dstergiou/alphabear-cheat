@@ -21,7 +21,7 @@ while True:
         valid_words = []
 
         # Get user input
-        query = input("[" + str(executed) + "]> ")
+        query = input("[" + str(executed) + "]> ").strip()
         if " " in query:
             rack, preference = query.split()
         else:
