@@ -10,7 +10,7 @@ executed = 0
 try:
     with open("words.txt", "r") as f:
         for line in f:
-            wordlist.append(line.strip())
+            wordlist.append(line.strip().replace('qu', 'Q'))
 except EnvironmentError:
     print ("Cannot find wordlist")
     exit(1)
@@ -47,7 +47,7 @@ while True:
         # Print words in the format (number of letters, word)
         for entry in valid_words:
             length = entry[0]
-            word = entry[1]
+            word = entry[1].replace('Q', 'qu')
             if preference:                     # If we had a preferred letter
                 candidate = True
                 for letter in list(preference):
