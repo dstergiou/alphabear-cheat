@@ -60,6 +60,6 @@ while True:
             else:                                   # else
                 print(str(length) + " " + word)     # print all matching words
         executed += 1
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, EOFError):
         print("Exiting")
         exit(1)
