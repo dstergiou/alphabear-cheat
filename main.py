@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import sys
 import readline
+from collections import Counter
+from functools import reduce
 
 # Initialize list
 wordlist = []
@@ -44,16 +46,16 @@ while True:
         # Sort the valid words
         valid_words.sort()
 
+        pref_counter = Counter(preference)
         # Print words in the format (number of letters, word)
         for entry in valid_words:
             length = entry[0]
             word = entry[1].replace('Q', 'qu')
             if preference:                     # If we had a preferred letter
                 candidate = True
-                for letter in list(preference):
-                    if not str(letter) in word:    # Check if the letter is in the word
-                        candidate = False
-                if candidate == True:
+                cnt = Counter(word)
+                cnt.subtract(pref_counter)
+                if reduce(min, cnt.values()) >= 0:
                     print(str(length) + " " + word) # And print only words containing the preferred letter(s)
             else:                                   # else
                 print(str(length) + " " + word)     # print all matching words
