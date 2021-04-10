@@ -10,7 +10,7 @@ executed = 0
 try:
     with open("words.txt", "r") as f:
         for line in f:
-            wordlist.append(line.strip().replace('qu','Q')
+            wordlist.append(line.strip().replace('qu','Q'))
 except EnvironmentError:
     print("Cannot find wordlist")
     exit(1)
