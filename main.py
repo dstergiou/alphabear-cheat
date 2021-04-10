@@ -64,6 +64,6 @@ while True:
                 print(str(length) + " " + word)          # Print all matching words
         executed += 1
 
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, EOFError):
         print("Exiting")
         exit(1)
