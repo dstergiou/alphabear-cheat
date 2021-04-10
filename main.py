@@ -12,7 +12,7 @@ try:
         for line in f:
             wordlist.append(line.strip())
 except EnvironmentError:
-    print ("Cannot find wordlist")
+    print("Cannot find wordlist")
     exit(1)
 
 while True:
@@ -38,7 +38,7 @@ while True:
                     break
                 else:
                     rack_letters.remove(letter)
-            if candidate == True:
+            if candidate:
                 valid_words.append([len(word), word])
 
         # Sort the valid words
@@ -48,16 +48,22 @@ while True:
         for entry in valid_words:
             length = entry[0]
             word = entry[1]
-            if preference:                     # If we had a preferred letter
+            if preference:                              # If we had a preferred letter
                 candidate = True
-                for letter in list(preference):
-                    if not str(letter) in word:    # Check if the letter is in the word
+                if '+' in preference:
+                    if preference.replace('+', '') not in word:
                         candidate = False
-                if candidate == True:
-                    print(str(length) + " " + word) # And print only words containing the preferred letter(s)
-            else:                                   # else
-                print(str(length) + " " + word)     # print all matching words
+                else:
+                    for letter in list(preference):
+                        if not str(letter) in word:     # Check if the letter is in the word
+                            candidate = False
+                if candidate:
+                    # And print only words containing the preferred letter(s)
+                    print(str(length) + " " + word)
+            else:                                   
+                print(str(length) + " " + word)          # Print all matching words
         executed += 1
+
     except KeyboardInterrupt:
         print("Exiting")
         exit(1)
