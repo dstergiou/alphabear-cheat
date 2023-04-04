@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 import sys
-import readline
+
+# import readline
+from pyreadline3 import Readline
+
+readline = Readline()
 
 # Initialize list
 wordlist = []
@@ -10,7 +14,7 @@ executed = 0
 try:
     with open("words.txt", "r") as f:
         for line in f:
-            wordlist.append(line.strip().replace('qu','Q'))
+            wordlist.append(line.strip().replace('qu', 'Q'))
 except EnvironmentError:
     print("Cannot find wordlist")
     exit(1)
@@ -21,11 +25,11 @@ while True:
         valid_words = []
 
         # Get user input
-        query = input("[" + str(executed) + "]> ")
-        if " " in query:
-            rack, preference = query.split()
+        letters = input(f'[{str(executed)}]> ')
+        if " " in letters:
+            rack, preference = letters.split()
         else:
-            rack = query
+            rack = letters
             preference = None
 
         # Find the words
@@ -47,21 +51,21 @@ while True:
         # Print words in the format (number of letters, word)
         for entry in valid_words:
             length = entry[0]
-            word = entry[1].replace('Q','qu')
-            if preference:                              # If we had a preferred letter
+            word = entry[1].replace('Q', 'qu')
+            if preference:
                 candidate = True
                 if '+' in preference:
                     if preference.replace('+', '') not in word:
                         candidate = False
                 else:
                     for letter in list(preference):
-                        if not str(letter) in word:     # Check if the letter is in the word
+                        if not str(letter) in word:
                             candidate = False
                 if candidate:
-                    # And print only words containing the preferred letter(s)
-                    print(str(length) + " " + word)
-            else:                                   
-                print(str(length) + " " + word)          # Print all matching words
+                    print(f'{str(length)} {word}')
+            else:
+                # Print all matching words
+                print(f'{str(length)} {word}')
         executed += 1
 
     except (KeyboardInterrupt, EOFError):
