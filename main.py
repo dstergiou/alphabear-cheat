@@ -20,6 +20,10 @@ while True:
         letters = input(f'> ')
         if " " in letters:
             rack, preference = letters.split()
+            if "$" in preference:
+                preference_status = "suffix"
+            if "^" in preference:
+                preference_status = "prefix"
         else:
             rack = letters
             preference = None
@@ -43,13 +47,9 @@ while True:
             word = entry[1].replace('Q', 'qu')
             if preference:
                 candidate = True
-                if '+' in preference:
-                    if preference.replace('+', '') not in word:
+                for letter in list(preference):
+                    if not str(letter) in word:
                         candidate = False
-                else:
-                    for letter in list(preference):
-                        if not str(letter) in word:
-                            candidate = False
                 if candidate:
                     print(f'{str(length)} {word}')
             else:
